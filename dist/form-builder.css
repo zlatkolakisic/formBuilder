@@ -1,43 +1,9 @@
-/*
+﻿/*
 formBuilder - http://kevinchappell.github.io/formBuilder/
 Version: 1.9.27
 Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 */
 @charset "UTF-8";
-* {
-  box-sizing: border-box; }
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit; }
-
-input {
-  line-height: normal; }
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  margin: 0;
-  font: inherit;
-  color: inherit; }
-
-textarea {
-  overflow: auto; }
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit; }
-
 .btn-group {
   position: relative;
   display: inline-block;
@@ -294,7 +260,7 @@ textarea.form-control {
   }
 }
 */
-[class^="icon-"]:before, [class*=" icon-"]:before {
+[class^="md_icon-"]:before, [class*=" md_icon-"]:before {
   font-family: "form-builder-font";
   font-style: normal;
   font-weight: normal;
@@ -321,71 +287,71 @@ textarea.form-control {
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
 
-.icon-autocomplete:before {
+.md_icon-autocomplete:before {
   content: '\e800'; }
 
 /* '' */
-.icon-calendar:before {
+.md_icon-calendar:before {
   content: '\e801'; }
 
 /* '' */
-.icon-checkbox:before {
+.md_icon-checkbox:before {
   content: '\e802'; }
 
 /* '' */
-.icon-checkbox-group:before {
+.md_icon-checkbox-group:before {
   content: '\e803'; }
 
 /* '' */
-.icon-radio-group:before {
+.md_icon-radio-group:before {
   content: '\e804'; }
 
 /* '' */
-.icon-rich-text:before {
+.md_icon-rich-text:before {
   content: '\e805'; }
 
 /* '' */
-.icon-select:before {
+.md_icon-select:before {
   content: '\e806'; }
 
 /* '' */
-.icon-text-area:before {
+.md_icon-text-area:before {
   content: '\e807'; }
 
 /* '' */
-.icon-text-input:before {
+.md_icon-text-input:before {
   content: '\e808'; }
 
 /* '' */
-.icon-pencil:before {
+.md_icon-pencil:before {
   content: '\e809'; }
 
 /* '' */
-.icon-file-input:before {
+.md_icon-file-input:before {
   content: '\e80a'; }
 
 /* '' */
-.icon-hidden-input:before {
+.md_icon-hidden-input:before {
   content: '\e80b'; }
 
 /* '' */
-.icon-resize-vertical:before {
+.md_icon-resize-vertical:before {
   content: '\e80c'; }
 
 /* '' */
-.icon-button-input:before {
+.md_icon-button-input:before {
   content: '\e80d'; }
 
 /* '' */
-.icon-attach:before {
+.md_icon-attach:before {
   content: '\e80e'; }
 
 /* '' */
-.icon-header:before {
+.md_icon-header:before {
   content: '\e80f'; }
 
 /* '' */
-.icon-paragraph:before {
+.md_icon-paragraph:before {
   content: '\e810'; }
 
 /* '' */
