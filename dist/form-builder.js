@@ -522,7 +522,8 @@ function formBuilderHelpersFn(opts, formBuilder) {
             $prevHolder = $('.prev-holder', field),
             previewData = {
                 label: $('.fld-label', field).val(),
-                type: fieldType
+                type: fieldType,
+                customFieldTypeId: 1
             },
             preview;
 
