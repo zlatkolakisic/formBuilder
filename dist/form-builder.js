@@ -15,7 +15,7 @@ var HTML_ENTITIES = function () {
 
     var htmlEntities = {};
 
-    htmlEntities.getHtmlTranslationTable = function (table, quoteStyle) {
+    htmlEntities.getHtmlTranslationTable = function (table, quoteStyle) {  
 
         var entities = {},
             hashMap = {},
