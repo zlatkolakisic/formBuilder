@@ -2500,9 +2500,14 @@ if (typeof Event !== 'function') {
  * @param  {String|Object} needle
  * @return {Boolean}
  */
+
+
+
 Array.prototype.inArray = function (needle) {
   return this.indexOf(needle) !== -1;
 };
+
+
 
 /**
  * Remove duplicates from an array of elements
