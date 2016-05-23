@@ -523,9 +523,16 @@ function formBuilderHelpersFn(opts, formBuilder) {
             previewData = {
                 label: $('.fld-label', field).val(),
                 type: fieldType,
-                customFieldTypeId: 1
+                //customFieldTypeId: 1
             },
             preview;
+
+
+        // previewData.customFieldTypeId = 1;
+        var customFieldTypeId = $('.fld-customFieldTypeId', field).val();
+        if (customFieldTypeId) {
+            previewData.customFieldTypeId = customFieldTypeId;
+        }
 
         var subtype = $('.fld-subtype', field).val();
         if (subtype) {
@@ -632,6 +639,7 @@ function formBuilderHelpersFn(opts, formBuilder) {
             case 'email':
             case 'date':
             case 'file':
+            case 'youtube':
                 preview = '<input ' + attrsString + '>';
                 break;
             case 'color':
@@ -644,7 +652,16 @@ function formBuilderHelpersFn(opts, formBuilder) {
             case 'autocomplete':
                 preview = '<input class="ui-autocomplete-input ' + attrs.className + '" autocomplete="on">';
                 break;
-            default:
+            case 'map':
+                preview = "<h2>MAP</h2>";
+                break;
+            case 'content-picker':
+                preview = "<h1>Content Picker</h1>"
+                break;
+            case 'taxonomy-picker':
+                preview = "<h1>Taxonomy Picker</h1>"
+                break;
+            default:           
                 preview = '<' + attrs.type + '>' + attrs.label + '</' + attrs.type + '>';
         }
 
@@ -1141,13 +1158,13 @@ function formBuilderEventsFn() {
 
         var defaults = {
             controlPosition: 'right',
-            controlOrder: ['autocomplete', 'button', 'checkbox', 'checkbox-group', 'date', 'file', 'header', 'hidden', 'paragraph', 'radio-group', 'select', 'text', 'textarea'],
+            controlOrder: ['autocomplete', 'button', 'checkbox', 'checkbox-group', 'date', 'file', 'header', 'hidden', 'paragraph', 'radio-group', 'select', 'text', 'textarea', 'map', 'content-picker', 'taxonomy-picker', 'youtube'],
             dataType: 'xml',
             /**
              * Field types to be disabled
              * ['text','select','textarea','radio-group','hidden','file','date','checkbox-group','checkbox','button','autocomplete']
              */
-            disableFields: ['autocomplete', 'hidden'],
+            disableFields: ['autocomplete', 'hidden', 'button', 'header', 'paragraph', 'select'],
             // Uneditable fields or other content you would like to appear before and after regular fields:
             append: false,
             prepend: false,
@@ -1185,7 +1202,9 @@ function formBuilderEventsFn() {
                 clearAll: 'Clear',
                 close: 'Close',
                 content: 'Content',
+                contentPicker: 'Content Picker',
                 copy: 'Copy To Clipboard',
+                customFieldTypeId: 'Custom Field Type Id',
                 dateField: 'Date Field',
                 description: 'Help Text',
                 descriptionField: 'Description',
@@ -1208,6 +1227,7 @@ function formBuilderEventsFn() {
                 limitRole: 'Limit access to one or more of the following roles:',
                 mandatory: 'Mandatory',
                 maxlength: 'Max Length',
+                map: 'Map',
                 minOptionMessage: 'This field requires a minimum of 2 options',
                 name: 'Name',
                 no: 'No',
@@ -1268,12 +1288,14 @@ function formBuilderEventsFn() {
                     header: ['h1', 'h2', 'h3'],
                     paragraph: ['p', 'address', 'blockquote', 'canvas', 'output']
                 },
+                taxonomyPicker: 'Taxonomy Picker',
                 text: 'Text Field',
                 textArea: 'Text Area',
                 toggle: 'Toggle',
                 warning: 'Warning!',
                 viewXML: '&lt;/&gt;',
-                yes: 'Yes'
+                yes: 'Yes',
+                youtube: 'youtube'
             },
             notify: {
                 error: function error(message) {
@@ -1321,25 +1343,56 @@ function formBuilderEventsFn() {
                 name: 'textarea'
             }
         }, {
+            label: opts.messages.map,
+            attrs: {
+                type: 'map',
+                className: 'map',
+                name: 'map'
+            }
+        }, {
+            label: opts.messages.contentPicker,
+            attrs: {
+                type: 'content-picker',
+                className: 'content-picker',
+                name: 'content-picker'
+            }
+        }, {
+            label: opts.messages.youtube,
+            attrs: {
+                type: 'youtube',
+                className: 'youtube',
+                name: 'youtube'
+            }
+        },  {
+            label: opts.messages.taxonomyPicker,
+            attrs: {
+                type: 'taxonomy-picker',
+                className: 'taxonomy-picker',
+                name: 'taxonomy-picker'
+            }
+        }, {
             label: opts.messages.text,
             attrs: {
                 type: 'text',
                 className: 'text-input',
-                name: 'text-input'
+                name: 'text-input',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.select,
             attrs: {
                 type: 'select',
                 className: 'select',
-                name: 'select'
+                name: 'select',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.radioGroup,
             attrs: {
                 type: 'radio-group',
                 className: 'radio-group',
-                name: 'radio-group'
+                name: 'radio-group',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.paragraph,
@@ -1365,28 +1418,32 @@ function formBuilderEventsFn() {
             attrs: {
                 type: 'file',
                 className: 'file-input',
-                name: 'file-input'
+                name: 'file-input',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.dateField,
             attrs: {
                 type: 'date',
                 className: 'calendar',
-                name: 'date-input'
+                name: 'date-input',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.checkboxGroup,
             attrs: {
                 type: 'checkbox-group',
                 className: 'checkbox-group',
-                name: 'checkbox-group'
+                name: 'checkbox-group',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.checkbox,
             attrs: {
                 type: 'checkbox',
                 className: 'checkbox',
-                name: 'checkbox'
+                name: 'checkbox',
+                customFieldTypeId: 'customFieldTypeId'
             }
         }, {
             label: opts.messages.button,
@@ -1430,7 +1487,8 @@ function formBuilderEventsFn() {
                 'class': 'md_icon-' + frmbFields[i].attrs.className,
                 'type': frmbFields[i].type,
                 'name': frmbFields[i].className,
-                'label': frmbFields[i].label
+                'label': frmbFields[i].label,
+                'customFieldTypeId': frmbFields[i].customFieldTypeId
             });
 
             $field.data('newFieldData', frmbFields[i]);
@@ -1596,6 +1654,8 @@ function formBuilderEventsFn() {
             field.toggle = field.toggle;
             field.multiple = field.type.match(/(checkbox-group)/);
             field.description = field.description !== undefined ? _helpers.htmlEncode(field.description) : '';
+            field.customFieldTypeId = field.customFieldTypeId;
+
 
             var match = /(?:^|\s)btn-(.*?)(?:\s|$)/g.exec(field.className);
             if (match) {
@@ -1689,6 +1749,27 @@ function formBuilderEventsFn() {
             appendFieldLi(opts.messages[type], advFields(values), values);
         };
 
+
+        var appendMap = function appendMap(values) {
+            var type = values.type || 'text';
+            appendFieldLi(opts.messages.map, advFields(values), values);
+        }
+
+        var appendContentPicker = function appendContentPicker(values) {
+            var type = values.type || 'text';
+            appendFieldLi(opts.messages.contentPicker, advFields(values), values);
+        }
+
+        var appendTaxonomyPicker = function appendTaxonomyPicker(values) {
+            var type = values.type || 'text';
+            appendFieldLi(opts.messages.taxonomyPicker, advFields(values), values);
+        }
+
+        var appendYoutube = function appendYoutube(values) {
+            var type = values.type || 'text';
+            appendFieldLi(opts.messages.youtube, advFields(values), values);
+        }
+
         /**
          * Add data for field with options [select, checkbox-group, radio-group]
          *
@@ -1744,7 +1825,11 @@ function formBuilderEventsFn() {
                 'rich-text': appendTextarea,
                 'textarea': appendTextarea,
                 'radio-group': appendSelectList,
-                'checkbox-group': appendSelectList
+                'checkbox-group': appendSelectList,
+                'map': appendMap,
+                'content-picker': appendContentPicker,
+                'taxonomy-picker': appendTaxonomyPicker,
+                'youtube': appendYoutube
             };
 
             values = values || '';
@@ -1809,7 +1894,7 @@ function formBuilderEventsFn() {
             advFields.push('</div></div>');
 
             advFields.push(textAttribute('maxlength', values));
-
+            advFields.push(textAttribute('customFieldTypeId', values));
             return advFields.join('');
         };
 
@@ -1914,7 +1999,7 @@ function formBuilderEventsFn() {
 
             var textArea = ['paragraph'];
 
-            var noMaxlength = ['checkbox', 'select', 'checkbox-group', 'date', 'autocomplete', 'radio-group', 'hidden', 'button', 'header'];
+            var noMaxlength = ['checkbox', 'select', 'checkbox-group', 'date', 'autocomplete', 'radio-group', 'hidden', 'button', 'header', 'map', 'content-picker', 'taxonomy-picker', 'youtube'];
 
             var attrVal = attribute === 'label' ? values.label : values[attribute] || '';
             var attrLabel = opts.messages[attribute];
@@ -2358,7 +2443,7 @@ function formBuilderEventsFn() {
     $.fn.formBuilder = function (options) {
         return this.each(function () {
             var element = this,
-                formBuilder;
+                formBuilder;           
             if ($(element).data('formBuilder')) {
                 var existingFormBuilder = $(element).parents('.form-builder:eq(0)');
                 var newElement = $(element).clone();
@@ -2416,7 +2501,9 @@ function formBuilderEventsFn() {
                         var types = _helpers.getTypes($field);
                         var xmlAttrs = {
                             className: fieldData.className,
+                            customFieldTypeId: $('input.fld-customFieldTypeId', $field).val(),
                             description: $('input.fld-description', $field).val(),
+                            id: $('input.fld-id', $field).val(),
                             label: $('.fld-label', $field).val(),
                             maxlength: $('input.fld-maxlength', $field).val(),
                             multiple: $('input[name="multiple"]', $field).is(':checked'),
