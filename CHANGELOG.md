@@ -1,5 +1,6 @@
 # Changelog
 
+- v1.9.29 - Feature: New Buttons for new forms
 - v1.9.28 - Feature: Material Design Compatable
 - v1.9.27 - Bugfix: Header subtypes [#136](https://github.com/kevinchappell/formBuilder/pull/136)
 - v1.9.26 - Bugfix: saved subtypes not rendering [#134](https://github.com/kevinchappell/formBuilder/pull/134)
